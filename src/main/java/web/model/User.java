@@ -1,10 +1,21 @@
 package web.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column
     private String name;
+    @Column
     private String lastName;
+    @Column
     private byte age;
 
     public User(long id, String name, String lastName, byte age) {
@@ -48,5 +59,14 @@ public class User {
 
     public void setAge(byte age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age;
     }
 }
