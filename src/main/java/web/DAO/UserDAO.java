@@ -8,23 +8,35 @@ import java.util.List;
 
 @Component
 public class UserDAO {
+
+    private static int USERS_COUNT;
     private List<User> users;
 
     {
         users = new ArrayList<>();
 
-        users.add(new User(0,"John", "Wick", (byte) 42));
-        users.add(new User(1, "Ada", "Wong", (byte) 30));
-        users.add(new User(2, "Elza", "Jin", (byte) 25));
+        users.add(new User(++USERS_COUNT, "John", "Wick", (byte) 42));
+        users.add(new User(++USERS_COUNT, "Ada", "Wong", (byte) 30));
+        users.add(new User(++USERS_COUNT, "Elza", "Jin", (byte) 25));
     }
 
-   public List<User> index() {
+    public List<User> index() {
         return users;
-   }
+    }
 
-   public User show (long id) {
-    return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
-   }
+    public User show(long id) {
+        return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+    }
 
+    public void save(User user) {
+        user.setId(++USERS_COUNT);
+        users.add(user);
+    }
+
+    public void update(long id, User updatedUser) {
+        User userToBeUpdated = show(id);
+        userToBeUpdated.setName(updatedUser.getName());
+
+    }
 
 }
