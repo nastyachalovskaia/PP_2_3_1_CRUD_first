@@ -52,8 +52,15 @@ public class UsersController {
     public String update(@ModelAttribute("user") User user, @PathVariable("id") long id) {
         userDAO.update(id, user);
         return "redirect:/users";
-
     }
+
+@DeleteMapping("/{id}")
+    public String delete(@PathVariable("id")long id) {
+        userDAO.delete(id);
+        return "redirect:/users";
+
+}
+
 
 
 }

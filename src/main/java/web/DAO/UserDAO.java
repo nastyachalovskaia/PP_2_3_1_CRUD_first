@@ -36,7 +36,12 @@ public class UserDAO {
     public void update(long id, User updatedUser) {
         User userToBeUpdated = show(id);
         userToBeUpdated.setName(updatedUser.getName());
+        userToBeUpdated.setLastName(updatedUser.getLastName());
+        userToBeUpdated.setAge(updatedUser.getAge());
+    }
 
+    public void delete(long id) {
+        users.removeIf(u -> u.getId() == id);
     }
 
 }
