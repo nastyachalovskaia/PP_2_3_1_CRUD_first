@@ -6,10 +6,8 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
-@Transactional(readOnly = true)
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -21,18 +19,18 @@ public class UserDaoImpl implements UserDao {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
-    public User show(Long id) {
+    public User getUserById(Long id) {
         return entityManager.find(User.class, id);
     }
 
     @Transactional
-    public void save(User user) {
+    public void saveUser(User user) {
         entityManager.persist(user);
     }
 
     @Transactional
-    public void update(Long id, User updatedUser) {
-        User userToBeUpdated = show(id);
+    public void updateUser(Long id, User updatedUser) {
+        User userToBeUpdated = getUserById(id);
         userToBeUpdated.setName(updatedUser.getName());
         userToBeUpdated.setLastName(updatedUser.getLastName());
         userToBeUpdated.setAge(updatedUser.getAge());
@@ -40,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void deleteUser(Long id) {
         entityManager.createQuery("delete from User u where u.id=:id")
                 .setParameter("id", id)
                 .executeUpdate();

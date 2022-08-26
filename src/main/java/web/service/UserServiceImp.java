@@ -23,22 +23,22 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        userDao.save(user);
+    public void saveUser(User user) {
+        userDao.saveUser(user);
     }
 
     @Override
-    public void delete(Long id) {
-        userDao.delete(id);
+    public void deleteUser(Long id) {
+        userDao.deleteUser(id);
     }
 
     @Override
-    public User show(Long id) {
-        return userDao.show(id);
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
     }
 
     @Override
-    public void update(Long id, User updatedUser) {
-        userDao.update(id, updatedUser);
+    public void updateUser(Long id, User updatedUser) {
+        userDao.updateUser(id, updatedUser);
     }
 }
