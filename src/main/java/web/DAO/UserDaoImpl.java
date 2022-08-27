@@ -23,12 +23,10 @@ public class UserDaoImpl implements UserDao {
         return entityManager.find(User.class, id);
     }
 
-    @Transactional
     public void saveUser(User user) {
         entityManager.persist(user);
     }
 
-    @Transactional
     public void updateUser(Long id, User updatedUser) {
         User userToBeUpdated = getUserById(id);
         userToBeUpdated.setName(updatedUser.getName());
@@ -37,7 +35,6 @@ public class UserDaoImpl implements UserDao {
         entityManager.merge(userToBeUpdated);
     }
 
-    @Transactional
     public void deleteUser(Long id) {
         entityManager.createQuery("delete from User u where u.id=:id")
                 .setParameter("id", id)
